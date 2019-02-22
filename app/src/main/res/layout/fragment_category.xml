@@ -9,7 +9,8 @@
     <Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:contentInsetStart="0dp">
 
         <TextView
             android:id="@+id/txt_toolbar"
@@ -44,12 +45,14 @@
             android:layout_height="match_parent"
             android:background="@color/color_107" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_subcategory"
+        <ScrollView
+            android:id="@+id/sl_subcategory"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/color_109"
-            android:overScrollMode="never" />
+            android:background="@color/color_109">
+
+            <include layout="@layout/item_subcategory" />
+        </ScrollView>
     </LinearLayout>
 
 
