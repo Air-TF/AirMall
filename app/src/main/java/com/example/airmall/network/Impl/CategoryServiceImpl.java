@@ -1,6 +1,5 @@
 package com.example.airmall.network.Impl;
 
-import com.example.airmall.bean.ResultData;
 import com.example.airmall.network.CategoryService;
 import com.example.airmall.network.HttpUtils;
 
@@ -10,7 +9,7 @@ import retrofit2.Callback;
 
 public class CategoryServiceImpl {
     private volatile static CategoryServiceImpl categoryService;
-    private CategoryService service = HttpUtils.initService().create(CategoryService.class);
+    private CategoryService service = HttpUtils.initService(CategoryService.class);
 
     public static CategoryServiceImpl getCategoryService(){
         if (categoryService == null) {

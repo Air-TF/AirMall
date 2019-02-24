@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/iv_item_img"
+        android:layout_width="132dp"
+        android:layout_height="132dp"
+        android:src="@drawable/item" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_item_img"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="小米9 SE 6GB+128GB"
+            android:textColor="@color/color_100"
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:id="@+id/tv_item_describe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:ellipsize="end"
+            android:lines="2"
+            android:text="索尼4800万超广角三摄/晓龙712全球首发/全息幻彩机身/三星AMOLED屏幕/5.97”水滴屏/第五代屏幕指纹识别/多功能NFC/红外遥控"
+            android:textSize="@dimen/font_small" />
+
+        <TextView
+            android:id="@+id/tv_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:text="￥1099"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/font_large" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="62872条评论"
+                android:textSize="@dimen/font_small" />
+
+            <ImageView
+                android:id="@+id/iv_item_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/cart" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_below="@id/iv_item_img"
+        android:layout_height="1dp"
+        android:background="@color/line_gary"/>
+</RelativeLayout>

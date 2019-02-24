@@ -3,20 +3,20 @@ package com.example.airmall.bean;
 /**
  *  统一响应结构
  */
-public class ResultData {
+public abstract class ResultData<T> {
 
     private static final String OK = "ok";
     private static final String ERROR = "error";
 
     private Meta meta;     // 元数据
-    private Object data;   // 响应内容
+    private T data;   // 响应内容
 
     public ResultData success() {
         this.meta = new Meta(true, OK);
         return this;
     }
 
-    public ResultData success(Object data) {
+    public ResultData success(T data) {
         this.meta = new Meta(true, OK);
         this.data = data;
         return this;
@@ -36,7 +36,7 @@ public class ResultData {
         return meta;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 

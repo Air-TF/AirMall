@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HttpUtils {
     private volatile static Retrofit retrofit;
 
-    public static Retrofit initService() {
+    public static <T> T initService(Class<T> tClass) {
         if (retrofit == null) {
             synchronized (Retrofit.class) {
                 if (retrofit == null) {
@@ -17,6 +17,6 @@ public class HttpUtils {
                 }
             }
         }
-        return retrofit;
+        return retrofit.create(tClass);
     }
 }
