@@ -1,6 +1,5 @@
 package com.example.airmall.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,10 +10,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -24,9 +23,9 @@ import com.example.airmall.adapter.BaseViewHolder;
 import com.example.airmall.adapter.SimpleAdapter;
 import com.example.airmall.bean.Item;
 import com.example.airmall.network.Impl.ItemServiceImpl;
+import com.example.airmall.utils.JsonUtils;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,6 +38,8 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private SimpleAdapter searchAdapter;
     private SwipeRefreshLayout refreshLayout;
+    private List<Item> items;
+    Intent intent;
 
     //当前页
     private int page = 1;
@@ -49,6 +50,8 @@ public class SearchActivity extends AppCompatActivity {
 
     private String keyword;
 
+    private String subcategoryId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,20 @@ public class SearchActivity extends AppCompatActivity {
         Fresco.initialize(this);
         initView();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        intent = getIntent();
+        int id = intent.getIntExtra("subcategoryId", -1);
+        if (id > 0) {
+            subcategoryId = String.valueOf(id);
+            refreshData();
+        } else {
+            subcategoryId = "";
+        }
+    }
+
 
     @TargetApi(Build.VERSION_CODES.M)
     private void initView() {
@@ -68,10 +85,21 @@ public class SearchActivity extends AppCompatActivity {
             protected void convert(BaseViewHolder viewHolder, Item item) {
                 SimpleDraweeView itemImage = (SimpleDraweeView) viewHolder.getView(R.id.iv_item_img);
                 itemImage.setImageURI(item.getImage());
-                ImageView cartImage = viewHolder.getImageView(R.id.iv_item_cart);
                 viewHolder.getTextView(R.id.tv_item_title).setText(item.getName());
                 viewHolder.getTextView(R.id.tv_item_describe).setText(item.getTitle());
                 viewHolder.getTextView(R.id.tv_item_price).setText(item.getPrice());
+                viewHolder.getImageView(R.id.iv_item_cart).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SearchActivity.this, "To cart", Toast.LENGTH_SHORT);
+                            }
+                        });
+                    }
+                });
+
             }
         };
         recyclerView.setAdapter(searchAdapter);
@@ -113,14 +141,16 @@ public class SearchActivity extends AppCompatActivity {
 
         searchAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                Toast.makeText(SearchActivity.this, position, Toast.LENGTH_SHORT);
+            public void onItemClick(View view, final int position) {
+                Intent intent = new Intent(SearchActivity.this, DetailActivity.class);
+                intent.putExtra("id", items.get(position).getId());
+                startActivity(intent);
             }
         });
     }
 
     private void refreshData() {
-        ItemServiceImpl.getItemService().getItemListByKeyword(page, size, keyword, new Callback<ResponseBody>() {
+        ItemServiceImpl.getItemService().getItemListByKeyword(page, size, keyword, subcategoryId, new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -131,8 +161,8 @@ public class SearchActivity extends AppCompatActivity {
                     total = data.getInt("total");
                     size = data.getInt("size");
                     JSONArray rows = data.getJSONArray("rows");
-                    Item[] fromJson = new Gson().fromJson(rows.toString(), Item[].class);
-                    final List<Item> items = Arrays.asList(fromJson);
+                    Item[] fromJson = JsonUtils.getGson().fromJson(rows.toString(), Item[].class);
+                    items = Arrays.asList(fromJson);
                     new Thread(new Runnable() {
                         @Override
                         public void run() {

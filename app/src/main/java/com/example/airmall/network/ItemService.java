@@ -8,6 +8,9 @@ import retrofit2.http.Query;
 
 public interface ItemService {
 
-    @GET("item/search/{keyword}")
-    Call<ResponseBody> getItemListByKeyword(@Path("keyword") String keyword,@Query("page")Integer page);
+    @GET("item/search")
+    Call<ResponseBody> getItemListByKeyword(@Query("keyword")String keyword,@Query("page")Integer page,@Query("subcategoryId")String subcategoryId);
+
+    @GET("item/{id}")
+    Call<ResponseBody> getItem(@Path("id")String id);
 }

@@ -1,7 +1,7 @@
 package com.example.airmall.network.Impl;
 
 import com.example.airmall.network.CategoryService;
-import com.example.airmall.network.HttpUtils;
+import com.example.airmall.utils.HttpUtils;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

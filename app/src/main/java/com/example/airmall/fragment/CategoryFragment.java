@@ -1,6 +1,7 @@
 package com.example.airmall.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,12 +21,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.airmall.R;
+import com.example.airmall.activity.SearchActivity;
 import com.example.airmall.adapter.CategoryAdapter;
 import com.example.airmall.adapter.GridViewAdapter;
 import com.example.airmall.bean.Category;
 import com.example.airmall.bean.ResultData;
 import com.example.airmall.bean.Subcategory;
 import com.example.airmall.network.Impl.CategoryServiceImpl;
+import com.example.airmall.utils.JsonUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
@@ -48,6 +51,8 @@ public class CategoryFragment extends Fragment {
     private TextView tvTitle;
     private GridView gridView;
     GridViewAdapter gridViewAdapter;
+    private List<Category> categories;
+    private int LeftPosition;
     private Map<String, List<String>> listMap = new HashMap<>();
     private List<String> categoryList = new ArrayList<>();
     private List<String> subcategoryList = new ArrayList<>();
@@ -82,6 +87,7 @@ public class CategoryFragment extends Fragment {
             public void onItemClick(int position) {
                 //向适配器中返回点击的位置，在适配器中进行操作
                 categoryAdapter.getSelectedPosition(position);
+                LeftPosition = position;
                 initGridView(position);
             }
         });
@@ -89,7 +95,10 @@ public class CategoryFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), subcategoryList.get(i), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), subcategoryList.get(i), Toast.LENGTH_SHORT).show();
+                Intent intent =new Intent(getActivity(), SearchActivity.class);
+                intent.putExtra("subcategoryId",categories.get(LeftPosition).getSubcategoryList().get(i).getId());
+                startActivity(intent);
             }
         });
     }
@@ -110,10 +119,10 @@ public class CategoryFragment extends Fragment {
                     String string = response.body().string();
                     JSONObject jsonObject = new JSONObject(string);
                     JSONArray categoryArray = jsonObject.getJSONArray("data");
-                    Category[] fromJson = new Gson().fromJson(categoryArray.toString(), Category[].class);
-                    List<Category> data = Arrays.asList(fromJson);
+                    Category[] fromJson = JsonUtils.getGson().fromJson(categoryArray.toString(), Category[].class);
+                    categories = Arrays.asList(fromJson);
                     categoryList.clear();
-                    for (Category category : data) {
+                    for (Category category : categories) {
                         categoryList.add(category.getName());
                         List<String> stringList = new ArrayList<>();
                         for (Subcategory subcategory : category.getSubcategoryList()) {
