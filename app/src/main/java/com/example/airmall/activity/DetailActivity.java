@@ -14,8 +14,10 @@ import android.widget.TextView;
 import com.example.airmall.R;
 import com.example.airmall.adapter.ExpandableListAdapter;
 import com.example.airmall.bean.Item;
+import com.example.airmall.fragment.MineFragment;
 import com.example.airmall.network.Impl.ItemServiceImpl;
 import com.example.airmall.utils.JsonUtils;
+import com.example.airmall.utils.SPUtils;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -42,7 +44,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        iv_image=findViewById(R.id.iv_img);
+        iv_image = findViewById(R.id.iv_img);
         tv_name = findViewById(R.id.tv_name);
         tv_title = findViewById(R.id.tv_title);
         tv_price = findViewById(R.id.tv_price);
@@ -50,7 +52,7 @@ public class DetailActivity extends AppCompatActivity {
         listAdapter = new ExpandableListAdapter(DetailActivity.this, item);
         listView.setAdapter(listAdapter);
 
-        ItemServiceImpl.getItemService().getItem(id, new Callback<ResponseBody>() {
+        ItemServiceImpl.getItemService().getItem(id, (String) SPUtils.get(this,"userId",""), new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -59,16 +61,12 @@ public class DetailActivity extends AppCompatActivity {
                     JSONObject data = jsonObject.getJSONObject("data");
                     item = JsonUtils.getGson().fromJson(data.toString(), Item.class);
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            listAdapter.setItem(item);
-                            iv_image.setImageURI(item.getImage());
-                            tv_name.setText(item.getName());
-                            tv_title.setText(item.getTitle());
-                            tv_price.setText(item.getPrice());
-                        }
-
+                    runOnUiThread(() -> {
+                        listAdapter.setItem(item);
+                        iv_image.setImageURI(item.getImage());
+                        tv_name.setText(item.getName());
+                        tv_title.setText(item.getTitle());
+                        tv_price.setText(item.getPrice());
                     });
                 } catch (Exception e) {
                     e.printStackTrace();

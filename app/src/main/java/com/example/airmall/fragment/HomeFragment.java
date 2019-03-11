@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.airmall.R;
-import com.example.airmall.activity.MainActivity;
 import com.example.airmall.activity.SearchActivity;
 
 

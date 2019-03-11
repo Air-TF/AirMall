@@ -3,6 +3,7 @@ package com.example.airmall.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.airmall.R;
 import com.example.airmall.adapter.NavigationPagerAdapter;
+import com.example.airmall.fragment.MineFragment;
+import com.example.airmall.utils.SPUtils;
 
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, ViewPager.OnPageChangeListener {
 
@@ -32,6 +35,13 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (SPUtils.get(this, "userId", "").equals("")) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         initView();
         rb_home.setChecked(true);
     }

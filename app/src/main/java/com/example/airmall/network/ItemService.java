@@ -12,5 +12,5 @@ public interface ItemService {
     Call<ResponseBody> getItemListByKeyword(@Query("keyword")String keyword,@Query("page")Integer page,@Query("subcategoryId")String subcategoryId);
 
     @GET("item/{id}")
-    Call<ResponseBody> getItem(@Path("id")String id);
+    Call<ResponseBody> getItem(@Path("id")String id,@Query("userId") String userId);
 }

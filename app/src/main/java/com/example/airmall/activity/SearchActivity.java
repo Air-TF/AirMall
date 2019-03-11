@@ -94,7 +94,7 @@ public class SearchActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(SearchActivity.this, "To cart", Toast.LENGTH_SHORT);
+                                Toast.makeText(SearchActivity.this, "To cart", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

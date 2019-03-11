@@ -27,8 +27,8 @@ public class ItemServiceImpl {
         call.enqueue(callback);
     }
 
-    public void getItem(String id, Callback<ResponseBody> callback) {
-        Call<ResponseBody> call = service.getItem(id);
+    public void getItem(String id,String userId, Callback<ResponseBody> callback) {
+        Call<ResponseBody> call = service.getItem(id,userId);
         call.enqueue(callback);
     }
 }
