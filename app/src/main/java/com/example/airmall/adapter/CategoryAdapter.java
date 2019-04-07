@@ -65,7 +65,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         }
     }
 
-
     @Override
     public int getItemCount() {
         return categoryList.size();
@@ -79,12 +78,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_category);
             view = itemView.findViewById(R.id.view);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onItemClick(getAdapterPosition());
-                }
-            });
+            itemView.setOnClickListener(view -> listener.onItemClick(getAdapterPosition()));
         }
     }
 

@@ -78,15 +78,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         populateAutoComplete();
 
         mPasswordView = findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener((textView,id,keyEvent)->{
+        mPasswordView.setOnEditorActionListener((textView, id, keyEvent) -> {
 //            new TextView.OnEditorActionListener() {
 //                @Override
 //                public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                    if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                        attemptLogin();
-                        return true;
-                    }
-                    return false;
+            if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                attemptLogin();
+                return true;
+            }
+            return false;
 //                }
 //            }
         });
@@ -323,28 +323,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 SPUtils.put(LoginActivity.this, "account", mEmail);
                 SPUtils.put(LoginActivity.this, "password", mPassword);
                 SPUtils.put(LoginActivity.this, "userId", userId);
-//                UserServiceImpl.getUserService().signIn(mEmail, mPassword, new Callback<ResponseBody>() {
-//                    @Override
-//                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                        try {
-//                            String string = response.body().string();
-//                            JSONObject jsonObject = new JSONObject(string);
-//                            JSONObject data = jsonObject.getJSONObject("data");
-//                            String userId = data.getString("userId");
-//                            SPUtils.put(LoginActivity.this,"account",mEmail);
-//                            SPUtils.put(LoginActivity.this,"password",mPassword);
-//                            SPUtils.put(LoginActivity.this,"userId",userId);
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                        runOnUiThread(() -> Toast.makeText(LoginActivity.this, "false", Toast.LENGTH_SHORT).show());
-//                    }
-//                });
-
             } catch (Exception e) {
                 return false;
             }

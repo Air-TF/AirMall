@@ -54,13 +54,13 @@
                 android:text="62872条评论"
                 android:textSize="@dimen/font_small" />
 
-            <ImageView
-                android:id="@+id/iv_item_cart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/cart" />
+            <!--<ImageView-->
+                <!--android:id="@+id/iv_item_cart"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:src="@drawable/cart" />-->
         </RelativeLayout>
     </LinearLayout>
 

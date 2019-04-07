@@ -13,12 +13,10 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.airmall.R;
-import com.example.airmall.adapter.BaseRecyclerAdapter;
 import com.example.airmall.adapter.BaseViewHolder;
 import com.example.airmall.adapter.SimpleAdapter;
 import com.example.airmall.bean.Item;
@@ -31,15 +29,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
     private SearchView searchView;
     private RecyclerView recyclerView;
-    private SimpleAdapter searchAdapter;
+    private SimpleAdapter<Item> searchAdapter;
     private SwipeRefreshLayout refreshLayout;
-    private List<Item> items;
-    Intent intent;
 
     //当前页
     private int page = 1;
@@ -63,7 +58,7 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        intent = getIntent();
+        Intent intent = getIntent();
         int id = intent.getIntExtra("subcategoryId", -1);
         if (id > 0) {
             subcategoryId = String.valueOf(id);
@@ -88,38 +83,21 @@ public class SearchActivity extends AppCompatActivity {
                 viewHolder.getTextView(R.id.tv_item_title).setText(item.getName());
                 viewHolder.getTextView(R.id.tv_item_describe).setText(item.getTitle());
                 viewHolder.getTextView(R.id.tv_item_price).setText(item.getPrice());
-                viewHolder.getImageView(R.id.iv_item_cart).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(SearchActivity.this, "To cart", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
-
+//                viewHolder.getImageView(R.id.iv_item_cart).setOnClickListener(view -> runOnUiThread(() -> Toast.makeText(SearchActivity.this, "To cart", Toast.LENGTH_SHORT).show()));
             }
         };
         recyclerView.setAdapter(searchAdapter);
 
-        recyclerView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
-                if (!recyclerView.canScrollVertically(1)) {
-                    page += 1;
-                    refreshData();
-                }
+        recyclerView.setOnScrollChangeListener((view, i, i1, i2, i3) -> {
+            if (!recyclerView.canScrollVertically(1)) {
+                page += 1;
+                refreshData();
             }
         });
 
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                page = 1;
-                refreshData();
-            }
+        refreshLayout.setOnRefreshListener(() -> {
+            page = 1;
+            refreshData();
         });
 
 
@@ -139,13 +117,10 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        searchAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, final int position) {
-                Intent intent = new Intent(SearchActivity.this, DetailActivity.class);
-                intent.putExtra("id", items.get(position).getId());
-                startActivity(intent);
-            }
+        searchAdapter.setOnItemClickListener((view, position) -> {
+            Intent intent = new Intent(SearchActivity.this, DetailActivity.class);
+            intent.putExtra("id", searchAdapter.getItem(position).getId());
+            startActivity(intent);
         });
     }
 
@@ -162,23 +137,14 @@ public class SearchActivity extends AppCompatActivity {
                     size = data.getInt("size");
                     JSONArray rows = data.getJSONArray("rows");
                     Item[] fromJson = JsonUtils.getGson().fromJson(rows.toString(), Item[].class);
-                    items = Arrays.asList(fromJson);
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (page > 1)
-                                        searchAdapter.loadMoreData(items);
-                                    else
-                                        searchAdapter.refreshData(items);
-                                    if (refreshLayout.isRefreshing())
-                                        refreshLayout.setRefreshing(false);
-                                }
-                            });
-                        }
-                    }).start();
+                    new Thread(() -> runOnUiThread(() -> {
+                        if (page > 1)
+                            searchAdapter.loadMoreData(Arrays.asList(fromJson));
+                        else
+                            searchAdapter.refreshData(Arrays.asList(fromJson));
+                        if (refreshLayout.isRefreshing())
+                            refreshLayout.setRefreshing(false);
+                    })).start();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

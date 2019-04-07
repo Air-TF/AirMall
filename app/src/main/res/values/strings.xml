@@ -2,6 +2,7 @@
     <string name="app_name">AirMall</string>
     <string name="tab_menu_mine">我的</string>
     <string name="tab_menu_cart">购物车</string>
+    <string name="tab_menu_star">收藏</string>
     <string name="tab_menu_category">分类</string>
     <string name="tab_menu_home">首页</string>
 
@@ -19,4 +20,5 @@
     <string name="error_incorrect_password">密码错误</string>
     <string name="error_field_required">此字段必填</string>
     <string name="permission_rationale">"提供电子邮件填写需要联系人权限。"</string>
+    <string name="recommendForYou">为你推荐</string>
 </resources>

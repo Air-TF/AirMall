@@ -1,6 +1,8 @@
 package com.example.airmall.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -8,20 +10,25 @@ import retrofit2.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.example.airmall.R;
+import com.example.airmall.adapter.BaseViewHolder;
 import com.example.airmall.adapter.ExpandableListAdapter;
+import com.example.airmall.adapter.SimpleAdapter;
 import com.example.airmall.bean.Item;
-import com.example.airmall.fragment.MineFragment;
 import com.example.airmall.network.Impl.ItemServiceImpl;
+import com.example.airmall.network.Impl.RecommendServiceImpl;
 import com.example.airmall.utils.JsonUtils;
 import com.example.airmall.utils.SPUtils;
+import com.example.airmall.weight.CustomExpandableListView;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.Arrays;
 
 public class DetailActivity extends AppCompatActivity {
     private SimpleDraweeView iv_image;
@@ -30,8 +37,10 @@ public class DetailActivity extends AppCompatActivity {
     private TextView tv_title;
     private String id;
     private Item item;
-    private ExpandableListView listView;
+    private CustomExpandableListView listView;
     private ExpandableListAdapter listAdapter;
+    private RecyclerView recyclerView;
+    private SimpleAdapter<Item> simpleAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +52,12 @@ public class DetailActivity extends AppCompatActivity {
         initView();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
     private void initView() {
         iv_image = findViewById(R.id.iv_img);
         tv_name = findViewById(R.id.tv_name);
@@ -51,8 +66,26 @@ public class DetailActivity extends AppCompatActivity {
         listView = findViewById(R.id.ex_list);
         listAdapter = new ExpandableListAdapter(DetailActivity.this, item);
         listView.setAdapter(listAdapter);
+        recyclerView = findViewById(R.id.rv_recommend);
+        recyclerView.setLayoutManager(new GridLayoutManager(DetailActivity.this, 2));
 
-        ItemServiceImpl.getItemService().getItem(id, (String) SPUtils.get(this,"userId",""), new Callback<ResponseBody>() {
+        simpleAdapter = new SimpleAdapter<Item>(DetailActivity.this, R.layout.item_recommend) {
+            @Override
+            protected void convert(BaseViewHolder viewHolder, Item item) {
+                SimpleDraweeView simpleDraweeView = (SimpleDraweeView) viewHolder.getView(R.id.sv_image);
+                simpleDraweeView.setImageURI(item.getImage());
+                viewHolder.getTextView(R.id.tv_name).setText(item.getName());
+                viewHolder.getTextView(R.id.tv_price).setText(item.getPrice());
+            }
+        };
+        simpleAdapter.setOnItemClickListener((view, position) -> {
+            Intent intent = new Intent(DetailActivity.this, DetailActivity.class);
+            intent.putExtra("id", simpleAdapter.getItem(position).getId());
+            startActivity(intent);
+        });
+        recyclerView.setAdapter(simpleAdapter);
+
+        ItemServiceImpl.getItemService().getItem(id, (String) SPUtils.get(this, "userId", ""), new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -78,7 +111,26 @@ public class DetailActivity extends AppCompatActivity {
 
             }
         });
-    }
 
+        RecommendServiceImpl.getRecommendService().listRecommendByItem(id, new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String string = response.body().string();
+                    JSONObject jsonObject = new JSONObject(string);
+                    JSONArray data = jsonObject.getJSONArray("data");
+                    Item[] items = JsonUtils.getGson().fromJson(data.toString(), Item[].class);
+                    runOnUiThread(() -> simpleAdapter.refreshData(Arrays.asList(items)));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
 
 }

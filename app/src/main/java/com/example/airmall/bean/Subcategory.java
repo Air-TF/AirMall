@@ -5,7 +5,6 @@ public class Subcategory {
 
     private String name;
 
-
     public Integer getId() {
         return id;
     }

@@ -6,40 +6,63 @@
     android:orientation="vertical"
     tools:context=".activity.DetailActivity">
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/iv_img"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="238dp" />
+        android:layout_height="match_parent"
+        android:padding="5dp">
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="小米9"
-        android:textSize="@dimen/font_larger" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="XiaoMi/小米 小米9透明SE全面屏尊享版星plus全新手机骁龙855"
-        android:textSize="@dimen/font_large" />
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/iv_img"
+                android:layout_width="match_parent"
+                android:layout_height="238dp" />
 
-    <TextView
-        android:id="@+id/tv_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="¥2599"
-        android:textColor="@color/text_red"
-        android:textSize="@dimen/font_larger" />
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="小米9"
+                android:textSize="@dimen/font_larger" />
 
-    <ExpandableListView
-        android:id="@+id/ex_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="XiaoMi/小米 小米9透明SE全面屏尊享版星plus全新手机骁龙855"
+                android:textSize="@dimen/font_large" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></ScrollView>
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="¥2599"
+                android:textColor="@color/text_red"
+                android:textSize="@dimen/font_larger" />
+
+            <com.example.airmall.weight.CustomExpandableListView
+                android:id="@+id/ex_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:paddingBottom="10dp"
+                android:text="@string/recommendForYou"
+                android:textSize="@dimen/font_larger" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_recommend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"/>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

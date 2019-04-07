@@ -46,7 +46,7 @@ public abstract class BaseRecyclerAdapter<T, H extends BaseViewHolder> extends R
 
     protected abstract void convert(H viewHolder, T item);
 
-    private T getItem(int position) {
+    public T getItem(int position) {
         if (position >= data.size()) return null;
         return data.get(position);
     }
@@ -95,6 +95,5 @@ public abstract class BaseRecyclerAdapter<T, H extends BaseViewHolder> extends R
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.itemClickListener = listener;
-
     }
 }
