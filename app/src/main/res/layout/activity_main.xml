@@ -27,7 +27,7 @@
             android:text="@string/tab_menu_category" />
 
         <RadioButton
-            android:id="@+id/rb_cart"
+            android:id="@+id/rb_star"
             style="@style/tab_menu_item"
             android:drawableTop="@drawable/star"
             android:text="@string/tab_menu_star" />

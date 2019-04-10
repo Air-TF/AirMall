@@ -1,6 +1,6 @@
 package com.example.airmall.adapter;
 
-import com.example.airmall.fragment.CartFragment;
+import com.example.airmall.fragment.StarFragment;
 import com.example.airmall.fragment.CategoryFragment;
 import com.example.airmall.fragment.HomeFragment;
 import com.example.airmall.activity.MainActivity;
@@ -15,14 +15,14 @@ public class NavigationPagerAdapter extends FragmentPagerAdapter {
     private final int PAGER_COUNT = 4;
     private HomeFragment homeFragment;
     private CategoryFragment categoryFragment;
-    private CartFragment cartFragment;
+    private StarFragment starFragment;
     private MineFragment mineFragment;
 
     public NavigationPagerAdapter(FragmentManager fm) {
         super(fm);
         homeFragment = new HomeFragment();
         categoryFragment = new CategoryFragment();
-        cartFragment = new CartFragment();
+        starFragment = new StarFragment();
         mineFragment = new MineFragment();
     }
 
@@ -36,8 +36,8 @@ public class NavigationPagerAdapter extends FragmentPagerAdapter {
             case MainActivity.PAGE_CATEGORY:
                 fragment = categoryFragment;
                 break;
-            case MainActivity.PAGE_CART:
-                fragment = cartFragment;
+            case MainActivity.PAGE_STAR:
+                fragment = starFragment;
                 break;
             case MainActivity.PAGE_MINE:
                 fragment = mineFragment;

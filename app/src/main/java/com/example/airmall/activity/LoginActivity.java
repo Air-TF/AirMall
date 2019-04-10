@@ -318,6 +318,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Response<ResponseBody> execute = call.execute();
                 String string = execute.body().string();
                 JSONObject jsonObject = new JSONObject(string);
+                JSONObject meta = jsonObject.getJSONObject("meta");
+                boolean success = meta.getBoolean("success");
+                if (success) {
+                    JSONObject data = jsonObject.getJSONObject("data");
+                    String userId = data.getString("userId");
+                    SPUtils.put(LoginActivity.this, "account", mEmail);
+                    SPUtils.put(LoginActivity.this, "password", mPassword);
+                    SPUtils.put(LoginActivity.this, "userId", userId);
+                }
+            } catch (Exception e) {
+                return false;
+            }
+
+            if (!SPUtils.get(LoginActivity.this, "userId", "").equals("")) return true;
+
+            try {
+                // Simulate network access.
+                Call<ResponseBody> call = UserServiceImpl.getUserService().getService().signUp(mEmail, mPassword);
+                Response<ResponseBody> execute = call.execute();
+                String string = execute.body().string();
+                JSONObject jsonObject = new JSONObject(string);
                 JSONObject data = jsonObject.getJSONObject("data");
                 String userId = data.getString("userId");
                 SPUtils.put(LoginActivity.this, "account", mEmail);
@@ -326,20 +347,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             } catch (Exception e) {
                 return false;
             }
-
-            if (!SPUtils.get(LoginActivity.this, "userId", "").equals("")) return true;
-
-            UserServiceImpl.getUserService().signUp(mEmail, mPassword, new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                }
-            });
 
             if (SPUtils.get(LoginActivity.this, "userId", "").equals("")) {
                 return false;

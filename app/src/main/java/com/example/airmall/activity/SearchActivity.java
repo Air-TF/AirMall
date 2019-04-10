@@ -83,14 +83,14 @@ public class SearchActivity extends AppCompatActivity {
                 viewHolder.getTextView(R.id.tv_item_title).setText(item.getName());
                 viewHolder.getTextView(R.id.tv_item_describe).setText(item.getTitle());
                 viewHolder.getTextView(R.id.tv_item_price).setText(item.getPrice());
-//                viewHolder.getImageView(R.id.iv_item_cart).setOnClickListener(view -> runOnUiThread(() -> Toast.makeText(SearchActivity.this, "To cart", Toast.LENGTH_SHORT).show()));
             }
         };
         recyclerView.setAdapter(searchAdapter);
 
         recyclerView.setOnScrollChangeListener((view, i, i1, i2, i3) -> {
             if (!recyclerView.canScrollVertically(1)) {
-                page += 1;
+                if (total > page * size)
+                    page += 1;
                 refreshData();
             }
         });

@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private RadioGroup rg_tab_bar;
     private RadioButton rb_home;
     private RadioButton rb_category;
-    private RadioButton rb_cart;
+    private RadioButton rb_star;
     private RadioButton rb_mine;
     private ViewPager viewPager;
     private NavigationPagerAdapter pagerAdapter;
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     //几个代表页面的常量
     public static final int PAGE_HOME = 0;
     public static final int PAGE_CATEGORY = 1;
-    public static final int PAGE_CART = 2;
+    public static final int PAGE_STAR = 2;
     public static final int PAGE_MINE = 3;
 
     @Override
@@ -44,7 +44,21 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         }
 
         initView();
-        rb_home.setChecked(true);
+        int mainId = getIntent().getIntExtra("mainId", 0);
+        switch (mainId) {
+            case 0:
+                rb_home.setChecked(true);
+                break;
+            case 1:
+                rb_category.setChecked(true);
+                break;
+            case 2:
+                rb_star.setChecked(true);
+                break;
+            case 3:
+                rb_mine.setChecked(true);
+                break;
+        }
     }
 
     private void initView() {
@@ -52,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         rg_tab_bar = findViewById(R.id.rg_tab_bar);
         rb_home = findViewById(R.id.rb_home);
         rb_category = findViewById(R.id.rb_category);
-        rb_cart = findViewById(R.id.rb_cart);
+        rb_star = findViewById(R.id.rb_star);
         rb_mine = findViewById(R.id.rb_mine);
         viewPager = findViewById(R.id.viewpager);
 
@@ -75,8 +89,8 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
             case R.id.rb_category:
                 viewPager.setCurrentItem(PAGE_CATEGORY);
                 break;
-            case R.id.rb_cart:
-                viewPager.setCurrentItem(PAGE_CART);
+            case R.id.rb_star:
+                viewPager.setCurrentItem(PAGE_STAR);
                 break;
             case R.id.rb_mine:
                 viewPager.setCurrentItem(PAGE_MINE);
@@ -100,13 +114,12 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
             switch (viewPager.getCurrentItem()) {
                 case PAGE_HOME:
                     rb_home.setChecked(true);
-
                     break;
                 case PAGE_CATEGORY:
                     rb_category.setChecked(true);
                     break;
-                case PAGE_CART:
-                    rb_cart.setChecked(true);
+                case PAGE_STAR:
+                    rb_star.setChecked(true);
                     break;
                 case PAGE_MINE:
                     rb_mine.setChecked(true);

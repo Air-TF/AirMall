@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="5dp"
     tools:context=".fragment.MineFragment">
 
     <Toolbar
@@ -28,11 +29,30 @@
             android:background="@color/div_white" />
     </Toolbar>
 
-    <TextView
-        android:id="@+id/tv_mine"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
-        android:gravity="center"/>
+        android:layout_below="@id/toolbar"
+        android:layout_above="@id/btn_logout"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/line_gary"
+        android:text="退出账号"/>
 
 </RelativeLayout>
