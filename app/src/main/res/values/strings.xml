@@ -16,7 +16,7 @@
     <string name="action_sign_in">注册/登录</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">账号不能为空</string>
-    <string name="error_invalid_password">密码过短</string>
+    <string name="error_invalid_password">密码需大于6位数</string>
     <string name="error_incorrect_password">密码错误</string>
     <string name="error_field_required">此字段必填</string>
     <string name="permission_rationale">"提供电子邮件填写需要联系人权限。"</string>

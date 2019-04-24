@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SectionItemView">
+        <attr name="siv_icon" format="reference" />
+        <attr name="siv_name" format="reference|string" />
+        <attr name="siv_indicator" format="boolean" />
+    </declare-styleable>
+</resources>

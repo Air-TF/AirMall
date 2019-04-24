@@ -9,9 +9,11 @@ import android.content.pm.PackageManager;
 import androidx.annotation.NonNull;
 
 import com.example.airmall.network.Impl.UserServiceImpl;
+import com.example.airmall.utils.MD5Utils;
 import com.example.airmall.utils.SPUtils;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -39,7 +41,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.example.airmall.R;
@@ -118,13 +123,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
             Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(android.R.string.ok, new View.OnClickListener() {
-                        @Override
-                        @TargetApi(Build.VERSION_CODES.M)
-                        public void onClick(View v) {
-                            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
-                        }
-                    });
+                    .setAction(android.R.string.ok, v -> requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS));
         } else {
             requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
         }
@@ -167,7 +166,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (!isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -202,7 +201,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() > 4;
+        return password.length() > 6;
     }
 
     /**
@@ -301,8 +300,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mEmail;
-        private final String mPassword;
+        private String mEmail;
+        private String mPassword;
+        private boolean isSignUp = false;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -311,6 +311,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
+            mPassword = MD5Utils.md5(mPassword);
+            mPassword = MD5Utils.md5(mPassword + MD5Utils.addSalt(mPassword));
 
             try {
                 // Simulate network access.
@@ -339,11 +341,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Response<ResponseBody> execute = call.execute();
                 String string = execute.body().string();
                 JSONObject jsonObject = new JSONObject(string);
-                JSONObject data = jsonObject.getJSONObject("data");
-                String userId = data.getString("userId");
-                SPUtils.put(LoginActivity.this, "account", mEmail);
-                SPUtils.put(LoginActivity.this, "password", mPassword);
-                SPUtils.put(LoginActivity.this, "userId", userId);
+                JSONObject meta = jsonObject.getJSONObject("meta");
+                boolean success = meta.getBoolean("success");
+                if (success) {
+                    isSignUp = true;
+                    return true;
+                }
             } catch (Exception e) {
                 return false;
             }
@@ -361,9 +364,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                if (isSignUp) {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
+                    dialog.setMessage("请点击邮箱链接激活");
+                    dialog.setPositiveButton("确定", null);
+                    dialog.show();
+                } else {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
     tools:context=".fragment.MineFragment">
 
     <Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/text_yellow"
         android:contentInsetStart="0dp">
 
         <TextView
@@ -19,7 +20,7 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:text="@string/tab_menu_mine"
-            android:textColor="@color/text_toolbar"
+            android:textColor="@color/text_white"
             android:textSize="18sp" />
 
         <View
@@ -32,27 +33,146 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
         android:layout_above="@id/btn_logout"
+        android:layout_below="@id/toolbar"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_email"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="100dp"
+            android:background="@color/text_yellow"
+            android:gravity="center_vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/img_account_avatar1"
+                    android:layout_width="@dimen/avatar_width"
+                    android:layout_height="@dimen/avatar_height"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="@dimen/spacing_major"
+                    android:src="@drawable/ic_default_avatar" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/spacing_minor"
+                    android:layout_toEndOf="@+id/img_account_avatar1"
+                    android:layout_toRightOf="@+id/img_account_avatar1"
+                    android:text="去登陆"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="?android:attr/textColorPrimaryInverse"
+                    android:textSize="@dimen/font_large"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_name"
+                    android:layout_alignLeft="@id/tv_name"
+                    android:layout_toRightOf="@id/img_account_avatar1"
+                    android:text="登录查看个人信息"
+                    android:textColor="?android:attr/textColorPrimaryInverse"
+                    android:textSize="@dimen/font_normal" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:src="@mipmap/keyboard_arrow_right" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <com.example.airmall.weight.section.SectionListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.example.airmall.weight.section.SectionTextItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:siv_icon="@drawable/security"
+                app:siv_indicator="true"
+                app:siv_name="账号与安全" />
+
+        </com.example.airmall.weight.section.SectionListView>
+
+        <com.example.airmall.weight.section.SectionListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_minor">
+
+            <com.example.airmall.weight.section.SectionTextItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:siv_icon="@drawable/location"
+                app:siv_indicator="true"
+                app:siv_name="地区设置" />
+
+            <com.example.airmall.weight.section.SectionTextItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:siv_icon="@drawable/volume"
+                app:siv_indicator="true"
+                app:siv_name="音效与通知" />
+
+            <com.example.airmall.weight.section.SectionTextItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:siv_icon="@drawable/visibility"
+                app:siv_indicator="true"
+                app:siv_name="隐私" />
+
+            <com.example.airmall.weight.section.SectionTextItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:siv_icon="@drawable/settings"
+                app:siv_indicator="true"
+                app:siv_name="通用" />
+        </com.example.airmall.weight.section.SectionListView>
+
+        <com.example.airmall.weight.section.SectionListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_minor">
+
+            <com.example.airmall.weight.section.SectionTextItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:siv_icon="@drawable/all_inclusive"
+                app:siv_indicator="true"
+                app:siv_name="关于我们" />
+
+            <com.example.airmall.weight.section.SectionTextItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:siv_icon="@drawable/help_outline"
+                app:siv_indicator="true"
+                app:siv_name="帮助与反馈" />
+        </com.example.airmall.weight.section.SectionListView>
+
     </LinearLayout>
 
 
     <Button
         android:id="@+id/btn_logout"
+        style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/line_gary"
-        android:text="退出账号"/>
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:text="退出账号" />
 
 </RelativeLayout>

@@ -27,6 +27,11 @@ public class UserServiceImpl {
         return userService;
     }
 
+    public void getUser(String id, Callback<ResponseBody> callback) {
+        Call<ResponseBody> call = service.getUser(id);
+        call.enqueue(callback);
+    }
+
     public void signIn(String account, String password, Callback<ResponseBody> callback) {
         Call<ResponseBody> call = service.signIn(account, password);
         call.enqueue(callback);
