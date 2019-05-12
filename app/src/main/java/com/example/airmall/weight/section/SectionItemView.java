@@ -17,10 +17,12 @@ public abstract class SectionItemView extends FrameLayout {
 
     protected View mItemView;
     protected TextView mTitleTxt;
+    protected TextView mContextTxt;
     protected ImageView mIndicatorImg;
     protected FrameLayout mExtensionLayout;
 
     protected CharSequence mTitle;
+    protected CharSequence mContext;
     protected Drawable mIcon;
     protected boolean mIndicator;
 
@@ -38,12 +40,15 @@ public abstract class SectionItemView extends FrameLayout {
         mItemView = LayoutInflater.from(context).inflate(R.layout.view_section_item, null, false);
         addView(mItemView);
 
-        mTitleTxt =  mItemView.findViewById(R.id.txt_name);
-        mIndicatorImg =  mItemView.findViewById(R.id.img_indicator);
-        mExtensionLayout =  mItemView.findViewById(R.id.layout_extension);
+        mTitleTxt = mItemView.findViewById(R.id.txt_name);
+        mContextTxt = mItemView.findViewById(R.id.txt_context);
+        mContextTxt.setTextColor(getResources().getColor(R.color.secondary_text));
+        mIndicatorImg = mItemView.findViewById(R.id.img_indicator);
+        mExtensionLayout = mItemView.findViewById(R.id.layout_extension);
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.SectionItemView);
         mTitle = array.getText(R.styleable.SectionItemView_siv_name);
+        mContext = array.getText(R.styleable.SectionItemView_siv_context);
         mIcon = array.getDrawable(R.styleable.SectionItemView_siv_icon);
         mIndicator = array.getBoolean(R.styleable.SectionItemView_siv_indicator, false);
         array.recycle();
@@ -54,6 +59,7 @@ public abstract class SectionItemView extends FrameLayout {
         super.onFinishInflate();
 
         mTitleTxt.setText(mTitle);
+        mContextTxt.setText(mContext);
         if (mIcon != null) {
             renderIconView(mIcon);
         }
@@ -81,5 +87,13 @@ public abstract class SectionItemView extends FrameLayout {
 
     public void setTitle(String title) {
         mTitleTxt.setText(title);
+    }
+
+    public String getContextTxt() {
+        return (String) mContextTxt.getText();
+    }
+
+    public void setContextTxt(String context) {
+        mContextTxt.setText(context);
     }
 }

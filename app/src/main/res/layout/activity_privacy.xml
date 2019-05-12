@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.PrivacyActivity">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentInsetStart="0dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:src="@drawable/arrow_back" />
+
+        <TextView
+            android:id="@+id/txt_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="left"
+            android:text="@string/security"
+            android:textColor="@color/text_toolbar"
+            android:textSize="@dimen/font_large" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/div_white" />
+    </Toolbar>
+
+    <com.example.airmall.weight.section.SectionListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_minor">
+
+        <com.example.airmall.weight.section.SectionTextItemView
+            android:id="@+id/stv_privacy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:siv_context="授权使用的手机权限"
+            app:siv_indicator="true"
+            app:siv_name="系统权限" />
+    </com.example.airmall.weight.section.SectionListView>
+
+    <com.example.airmall.weight.section.SectionListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_minor">
+
+        <com.example.airmall.weight.section.SectionTextItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:siv_indicator="true"
+            app:siv_name="隐私政策" />
+    </com.example.airmall.weight.section.SectionListView>
+
+</LinearLayout>

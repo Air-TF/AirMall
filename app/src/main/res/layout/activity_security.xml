@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SecurityActivity"
+    android:orientation="vertical">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentInsetStart="0dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:src="@drawable/arrow_back" />
+
+        <TextView
+            android:id="@+id/txt_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="left"
+            android:text="@string/security"
+            android:textColor="@color/text_toolbar"
+            android:textSize="@dimen/font_large" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/div_white" />
+    </Toolbar>
+
+    <com.example.airmall.weight.section.SectionListView
+        android:id="@+id/slv_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar">
+
+        <com.example.airmall.weight.section.SectionTextItemView
+            android:id="@+id/tv_userId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:siv_indicator="false"
+            app:siv_name="用户ID" />
+
+        <com.example.airmall.weight.section.SectionTextItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:siv_name="修改手机号"
+            app:siv_indicator="true"/>
+
+        <com.example.airmall.weight.section.SectionTextItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:siv_name="修改登陆密码"
+            app:siv_indicator="true"/>
+
+        <com.example.airmall.weight.section.SectionTextItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:siv_name="注销账号"
+            app:siv_indicator="true"/>
+    </com.example.airmall.weight.section.SectionListView>
+
+    <com.example.airmall.weight.section.SectionListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/slv_user"
+        android:layout_marginTop="@dimen/spacing_minor">
+
+        <com.example.airmall.weight.section.SectionTextItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:siv_name="账户保护"
+            app:siv_indicator="true"/>
+
+        <com.example.airmall.weight.section.SectionTextItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:siv_name="账户体验中心"
+            app:siv_indicator="true"/>
+
+        <com.example.airmall.weight.section.SectionTextItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:siv_name="安全中心"
+            app:siv_indicator="true"/>
+    </com.example.airmall.weight.section.SectionListView>
+
+</LinearLayout>

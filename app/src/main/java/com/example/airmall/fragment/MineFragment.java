@@ -13,25 +13,27 @@ import retrofit2.Response;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.airmall.R;
-import com.example.airmall.activity.LoginActivity;
+import com.example.airmall.activity.PrivacyActivity;
+import com.example.airmall.activity.SecurityActivity;
+import com.example.airmall.activity.UserInfoActivity;
 import com.example.airmall.network.Impl.UserServiceImpl;
 import com.example.airmall.utils.SPUtils;
+import com.example.airmall.weight.section.SectionTextItemView;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.io.IOException;
 
 
 public class MineFragment extends Fragment {
     private TextView tv_id;
     private TextView tv_name;
     private TextView tv_email;
-    private Button btn_logout;
+    private RelativeLayout rl_user_info; //用户信息
+    private SectionTextItemView stv_security;//帐号与安全
+    private SectionTextItemView stv_privacy;//隐私
 
     private String userId;
     private String userName;
@@ -48,7 +50,9 @@ public class MineFragment extends Fragment {
         tv_id = view.findViewById(R.id.tv_id);
         tv_name = view.findViewById(R.id.tv_name);
         tv_email = view.findViewById(R.id.tv_email);
-        btn_logout = view.findViewById(R.id.btn_logout);
+        rl_user_info = view.findViewById(R.id.rl_user_info);
+        stv_security = view.findViewById(R.id.stv_security);
+        stv_privacy = view.findViewById(R.id.stv_privacy);
 
         userId = SPUtils.get(getActivity(), "userId", "").toString();
         tv_id.setText(userId);
@@ -75,11 +79,18 @@ public class MineFragment extends Fragment {
             }
         });
 
-        btn_logout.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            SPUtils.clear(getActivity());
+        rl_user_info.setOnClickListener((view1) -> {
+            Intent intent = new Intent(getActivity(), UserInfoActivity.class);
             startActivity(intent);
-            getActivity().finish();
+        });
+
+        stv_security.setOnClickListener((view1) -> {
+            Intent intent = new Intent(getActivity(), SecurityActivity.class);
+            startActivity(intent);
+        });
+        stv_privacy.setOnClickListener((view1) -> {
+            Intent intent = new Intent(getActivity(), PrivacyActivity.class);
+            startActivity(intent);
         });
     }
 

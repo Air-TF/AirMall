@@ -3,6 +3,7 @@
     <declare-styleable name="SectionItemView">
         <attr name="siv_icon" format="reference" />
         <attr name="siv_name" format="reference|string" />
+        <attr name="siv_context" format="reference|string" />
         <attr name="siv_indicator" format="boolean" />
     </declare-styleable>
 </resources>

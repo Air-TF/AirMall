@@ -12,6 +12,7 @@ import com.example.airmall.R;
 public class SectionTextItemView extends SectionItemView {
 
     private TextView mSubtitleTxt;
+    private TextView mContextTxt;
 
     public SectionTextItemView(Context context) {
         this(context, null);
@@ -32,6 +33,8 @@ public class SectionTextItemView extends SectionItemView {
         mSubtitleTxt = new TextView(getContext());
         mSubtitleTxt.setTextColor(getResources().getColor(R.color.secondary_text));
         mExtensionLayout.addView(mSubtitleTxt, lp);
+        mContextTxt = new TextView(getContext());
+        mExtensionLayout.addView(mContextTxt, lp);
     }
 
     public void setSubtitle(String subtitle) {
@@ -40,5 +43,13 @@ public class SectionTextItemView extends SectionItemView {
 
     public String getSubtitle() {
         return (String) mSubtitleTxt.getText();
+    }
+
+    public String getContextTxt() {
+        return (String) mContextTxt.getText();
+    }
+
+    public void setContextTxt(String context) {
+        mContextTxt.setText(context);
     }
 }

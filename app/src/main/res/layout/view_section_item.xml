@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:id="@+id/layout_item"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_centerVertical="true"
-              android:background="@drawable/selector_common_item_bg"
-              android:orientation="vertical"
-    >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
+    android:background="@drawable/selector_common_item_bg"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/section_height"
-        android:padding="@dimen/spacing_minor"
-        >
+        android:padding="@dimen/spacing_minor">
 
         <TextView
             android:id="@+id/txt_name"
@@ -24,22 +22,30 @@
             android:layout_marginLeft="@dimen/spacing_minor"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/font_normal"
-            tools:text="用户名"
-            />
+            tools:text="用户名" />
 
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            />
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/txt_context"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/spacing_minor"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/font_normal"
+            tools:text="用户名" />
+
 
         <FrameLayout
             android:id="@+id/layout_extension"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="@dimen/spacing_minor"
-            />
+            android:layout_marginRight="@dimen/spacing_minor" />
 
         <ImageView
             android:id="@+id/img_indicator"
@@ -48,8 +54,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginRight="@dimen/spacing_minor"
             android:src="@mipmap/ic_arrow_right"
-            android:visibility="invisible"
-            />
+            android:visibility="invisible" />
 
     </LinearLayout>
 
@@ -58,7 +63,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_size"
         android:layout_marginLeft="@dimen/spacing_major"
-        android:background="@color/divider"
-        />
+        android:background="@color/divider" />
 
 </LinearLayout>

@@ -21,4 +21,6 @@
     <string name="error_field_required">此字段必填</string>
     <string name="permission_rationale">"提供电子邮件填写需要联系人权限。"</string>
     <string name="recommendForYou">为你推荐</string>
+    <string name="user_info">用户信息</string>
+    <string name="security">账号与安全</string>
 </resources>

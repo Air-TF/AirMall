@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.UserInfoActivity">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/text_white"
+        android:contentInsetStart="0dp">
+
+        <TextView
+            android:id="@+id/txt_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/user_info"
+            android:textColor="@color/text_toolbar"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/div_white" />
+    </Toolbar>
+
+    <ImageView
+        android:id="@+id/img_account"
+        android:layout_width="@dimen/avatar_width"
+        android:layout_height="@dimen/avatar_height"
+        android:layout_below="@id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/spacing_major"
+        android:src="@drawable/ic_default_avatar"
+        android:layout_marginBottom="@dimen/spacing_massive"/>
+
+
+    <com.example.airmall.weight.section.SectionListView
+        android:id="@+id/slv_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_account">
+
+        <com.example.airmall.weight.section.SectionTextItemView
+            android:id="@+id/tv_userId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:siv_indicator="false"
+            app:siv_name="用户ID" />
+
+        <com.example.airmall.weight.section.SectionTextItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:siv_name="用户昵称" />
+
+        <com.example.airmall.weight.section.SectionTextItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:siv_indicator="true"
+            app:siv_name="性别" />
+    </com.example.airmall.weight.section.SectionListView>
+
+
+    <Button
+        android:id="@+id/btn_logout"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:text="退出账号"
+        android:textStyle="bold" />
+
+</RelativeLayout>

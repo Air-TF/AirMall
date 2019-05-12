@@ -15,14 +15,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".activity.DetailActivity"/>
+        <activity android:name=".activity.PrivacyActivity"></activity>
+        <activity android:name=".activity.SecurityActivity" />
+        <activity android:name=".activity.UserInfoActivity" />
+        <activity android:name=".activity.DetailActivity" />
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.MainActivity">
