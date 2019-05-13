@@ -23,4 +23,6 @@
     <string name="recommendForYou">为你推荐</string>
     <string name="user_info">用户信息</string>
     <string name="security">账号与安全</string>
+    <string name="suggestion">意见反馈</string>
+    <string name="about">关于我们</string>
 </resources>

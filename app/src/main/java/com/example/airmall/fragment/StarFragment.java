@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -69,7 +70,8 @@ public class StarFragment extends Fragment {
         refreshLayout = view.findViewById(R.id.refreshLayout);
         rv_star = view.findViewById(R.id.rv_star);
 
-        rv_star.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
+//        rv_star.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
+        rv_star.setLayoutManager(new GridLayoutManager(getActivity(), 1));
 
         simpleAdapter = new SimpleAdapter<Item>(getActivity(), R.layout.item_search) {
             @Override

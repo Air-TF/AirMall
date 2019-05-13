@@ -17,8 +17,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.airmall.R;
+import com.example.airmall.activity.AboutActivity;
 import com.example.airmall.activity.PrivacyActivity;
 import com.example.airmall.activity.SecurityActivity;
+import com.example.airmall.activity.SuggestionActivity;
 import com.example.airmall.activity.UserInfoActivity;
 import com.example.airmall.network.Impl.UserServiceImpl;
 import com.example.airmall.utils.SPUtils;
@@ -34,6 +36,8 @@ public class MineFragment extends Fragment {
     private RelativeLayout rl_user_info; //用户信息
     private SectionTextItemView stv_security;//帐号与安全
     private SectionTextItemView stv_privacy;//隐私
+    private SectionTextItemView stv_about;//关于我们
+    private SectionTextItemView stv_suggestion;//意见反馈
 
     private String userId;
     private String userName;
@@ -53,6 +57,8 @@ public class MineFragment extends Fragment {
         rl_user_info = view.findViewById(R.id.rl_user_info);
         stv_security = view.findViewById(R.id.stv_security);
         stv_privacy = view.findViewById(R.id.stv_privacy);
+        stv_about = view.findViewById(R.id.stv_about);
+        stv_suggestion = view.findViewById(R.id.stv_suggestion);
 
         userId = SPUtils.get(getActivity(), "userId", "").toString();
         tv_id.setText(userId);
@@ -90,6 +96,14 @@ public class MineFragment extends Fragment {
         });
         stv_privacy.setOnClickListener((view1) -> {
             Intent intent = new Intent(getActivity(), PrivacyActivity.class);
+            startActivity(intent);
+        });
+        stv_about.setOnClickListener((view1) -> {
+            Intent intent = new Intent(getActivity(), AboutActivity.class);
+            startActivity(intent);
+        });
+        stv_suggestion.setOnClickListener((view1) -> {
+            Intent intent = new Intent(getActivity(), SuggestionActivity.class);
             startActivity(intent);
         });
     }

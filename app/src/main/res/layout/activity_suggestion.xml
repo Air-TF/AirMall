@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.SuggestionActivity">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentInsetStart="0dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:src="@drawable/arrow_back" />
+
+        <TextView
+            android:id="@+id/txt_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="left"
+            android:text="@string/suggestion"
+            android:textColor="@color/text_toolbar"
+            android:textSize="@dimen/font_large" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/div_white" />
+    </Toolbar>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/text_white"
+        android:gravity="left|top"
+        android:hint="请描述您遇到的相关问题"
+        android:inputType="textMultiLine"
+        android:minLines="6"
+        android:padding="10dp"
+        android:textSize="@dimen/font_normal" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:background="@color/text_white"
+        android:hint="请留下您的手机号码(必填)"
+        android:padding="15dp"
+        android:textSize="@dimen/font_normal" />
+
+    <Button
+        android:layout_width="match_parent"
+        style="@style/button"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/color_002"
+        android:text="提交"
+        android:textColor="@color/text_white" />
+
+
+</LinearLayout>

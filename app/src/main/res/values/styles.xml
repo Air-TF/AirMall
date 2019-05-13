@@ -21,6 +21,9 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="button" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/round_corner_bg</item>
+    </style>
 
     <!--<style name="search_view">-->
         <!--<item name="android:textSize">18sp</item>-->

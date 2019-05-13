@@ -152,6 +152,7 @@
             android:layout_marginTop="@dimen/spacing_minor">
 
             <com.example.airmall.weight.section.SectionTextItemView
+                android:id="@+id/stv_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:siv_icon="@drawable/all_inclusive"
@@ -159,11 +160,12 @@
                 app:siv_name="关于我们" />
 
             <com.example.airmall.weight.section.SectionTextItemView
+                android:id="@+id/stv_suggestion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:siv_icon="@drawable/help_outline"
                 app:siv_indicator="true"
-                app:siv_name="帮助与反馈" />
+                app:siv_name="意见反馈" />
         </com.example.airmall.weight.section.SectionListView>
 
     </LinearLayout>

@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".activity.PrivacyActivity"></activity>
+        <activity android:name=".activity.AboutActivity"></activity>
+        <activity android:name=".activity.SuggestionActivity" />
+        <activity android:name=".activity.PrivacyActivity" />
         <activity android:name=".activity.SecurityActivity" />
         <activity android:name=".activity.UserInfoActivity" />
         <activity android:name=".activity.DetailActivity" />
