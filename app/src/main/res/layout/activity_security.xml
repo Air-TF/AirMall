@@ -53,7 +53,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:siv_name="修改手机号"
-            app:siv_indicator="true"/>
+            app:siv_indicator="true"
+            app:siv_context="139******94"/>
+
+        <com.example.airmall.weight.section.SectionTextItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:siv_name="修改邮箱"
+            app:siv_indicator="true"
+            app:siv_context="131***@qq.com"/>
 
         <com.example.airmall.weight.section.SectionTextItemView
             android:layout_width="match_parent"

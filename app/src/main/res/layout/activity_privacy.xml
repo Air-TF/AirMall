@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="left"
-            android:text="@string/security"
+            android:text="@string/privacy"
             android:textColor="@color/text_toolbar"
             android:textSize="@dimen/font_large" />
 

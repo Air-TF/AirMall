@@ -30,15 +30,16 @@
             android:background="@color/div_white" />
     </Toolbar>
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/img_account"
         android:layout_width="@dimen/avatar_width"
         android:layout_height="@dimen/avatar_height"
         android:layout_below="@id/toolbar"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="@dimen/spacing_major"
-        android:layout_marginBottom="@dimen/spacing_massive"
-        android:src="@drawable/ic_default_avatar" />
+        android:layout_marginVertical="@dimen/spacing_massive"
+        app:placeholderImage="@drawable/icon"
+        app:roundAsCircle="true" />
 
 
     <com.example.airmall.weight.section.SectionListView
@@ -57,12 +58,14 @@
         <com.example.airmall.weight.section.SectionTextItemView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:siv_context="田飞"
             app:siv_indicator="true"
             app:siv_name="昵称" />
 
         <com.example.airmall.weight.section.SectionTextItemView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:siv_context="男"
             app:siv_indicator="true"
             app:siv_name="性别" />
     </com.example.airmall.weight.section.SectionListView>
